@@ -1,0 +1,29 @@
+<Window x:Class="ScreenTranslator.Views.SelectionOverlayWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="SelectionOverlayWindow"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        AllowsTransparency="True"
+        Background="#01000000"
+        Topmost="True"
+        ShowInTaskbar="False"
+        WindowState="Maximized"
+        Cursor="Cross"
+        Focusable="True"
+        MouseDown="Window_MouseDown"
+        MouseMove="Window_MouseMove"
+        MouseUp="Window_MouseUp"
+        KeyDown="Window_KeyDown">
+
+	<Canvas x:Name="SelectionCanvas">
+		<Rectangle x:Name="SelectionRectangle"
+                   Stroke="Red"
+                   StrokeThickness="2"
+                   Visibility="Collapsed"
+                   Fill="#3300A8FF"/>
+	</Canvas>
+</Window>
