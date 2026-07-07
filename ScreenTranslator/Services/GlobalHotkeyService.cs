@@ -28,7 +28,7 @@ namespace ScreenTranslator.Services
 		{
 			var helper = new WindowInteropHelper(window);
 
-			// Si la ventana todavía no tiene handle nativo (no se mostró aún), forzamos su creación
+			// If the window doesn't have a native handle yet (not shown), we force its creation
 			if (helper.Handle == IntPtr.Zero)
 				helper.EnsureHandle();
 
@@ -45,7 +45,7 @@ namespace ScreenTranslator.Services
 
 			if (!success)
 				throw new InvalidOperationException(
-					"No se pudo registrar el atajo global. Puede que ya esté en uso por otra aplicación.");
+					"Global shortcut could not be registered. It might be used by another app already.");
 		}
 
 		private IntPtr WndProc(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
