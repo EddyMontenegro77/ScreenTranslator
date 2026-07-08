@@ -1,4 +1,6 @@
 ﻿using ScreenTranslator.Services;
+using ScreenTranslator.Models;
+using ScreenTranslator.Services.OCRs;
 using ScreenTranslator.Helpers;
 using System.Windows;
 using System.Windows.Input;
@@ -12,6 +14,7 @@ namespace ScreenTranslator
     public partial class MainWindow : Window
     {
         private readonly Services.GlobalHotkeyService _hotkeyService = new();
+        private readonly IOcrService _ocrService = new WindowsOcrService("ja");
         public MainWindow()
         {
             InitializeComponent();
@@ -38,7 +41,7 @@ namespace ScreenTranslator
             base.OnClosed(e);
         }
 
-        private void BtnCapture_Click(object sender, RoutedEventArgs e)
+        private async void BtnCapture_Click(object sender, RoutedEventArgs e)
         {
             var overlay = new Views.SelectionOverlayWindow();
             this.WindowState = WindowState.Minimized;
@@ -48,10 +51,22 @@ namespace ScreenTranslator
             if (result == true && !overlay.WasCancelled)
             {
                 Rect selectedArea = overlay.SelectedArea;
-                System.Drawing.Rectangle physicalRect = selectedArea.ToPhysicalRectangle(this);
-                Bitmap bitmap = Services.ScreenCaptureService.CaptureScreen(physicalRect);
-                Services.CopyToClipboardService.CopyImageToClipboard(bitmap);
-                MessageBox.Show($"Selected Area: {selectedArea}");
+                Rectangle physicalRect = selectedArea.ToPhysicalRectangle(this);
+
+                Bitmap bitmap = ScreenCaptureService.CaptureScreen(physicalRect);
+                bitmap = ImagePreprocessingService.PreprocessImage(bitmap, new List<PreprocessOption> { PreprocessOption.Upscale, PreprocessOption.Grayscale, PreprocessOption.Binarize });
+
+                //CopyToClipboardService.CopyImageToClipboard(bitmap);
+
+                var ocrResult = await _ocrService.ExtractTextAsync(bitmap);
+
+                // Copy detected text to clipboard using existing service
+                if (!string.IsNullOrEmpty(ocrResult.FullText))
+                {
+                    CopyToClipboardService.CopyTextToClipboard(ocrResult.FullText);
+                }
+
+                MessageBox.Show($"Texto detectado:\n{ocrResult.FullText}");
             }
         }
     }
