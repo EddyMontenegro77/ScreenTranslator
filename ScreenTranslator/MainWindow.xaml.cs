@@ -1,6 +1,8 @@
 ﻿using ScreenTranslator.Services;
+using ScreenTranslator.Helpers;
 using System.Windows;
 using System.Windows.Input;
+using System.Drawing;
 
 namespace ScreenTranslator
 {
@@ -46,6 +48,9 @@ namespace ScreenTranslator
             if (result == true && !overlay.WasCancelled)
             {
                 Rect selectedArea = overlay.SelectedArea;
+                System.Drawing.Rectangle physicalRect = selectedArea.ToPhysicalRectangle(this);
+                Bitmap bitmap = Services.ScreenCaptureService.CaptureScreen(physicalRect);
+                Services.CopyToClipboardService.CopyImageToClipboard(bitmap);
                 MessageBox.Show($"Selected Area: {selectedArea}");
             }
         }
