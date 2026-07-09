@@ -1,10 +1,12 @@
-﻿using ScreenTranslator.Services;
+﻿using ScreenTranslator.Helpers;
 using ScreenTranslator.Models;
+using ScreenTranslator.Models.Translation;
+using ScreenTranslator.Services;
 using ScreenTranslator.Services.OCRs;
-using ScreenTranslator.Helpers;
+using ScreenTranslator.Services.Translation;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Input;
-using System.Drawing;
 
 namespace ScreenTranslator
 {
@@ -13,8 +15,9 @@ namespace ScreenTranslator
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly Services.GlobalHotkeyService _hotkeyService = new();
+        private readonly GlobalHotkeyService _hotkeyService = new();
         private readonly IOcrService _ocrService = new WindowsOcrService("ja");
+        private readonly ITranslationService _translationService = new OllamaTranslationService(App.OllamaManager, "qwen3.5:9b");
         public MainWindow()
         {
             InitializeComponent();
@@ -63,10 +66,19 @@ namespace ScreenTranslator
                 // Copy detected text to clipboard using existing service
                 if (!string.IsNullOrEmpty(ocrResult.FullText))
                 {
-                    CopyToClipboardService.CopyTextToClipboard(ocrResult.FullText);
+                    //CopyToClipboardService.CopyTextToClipboard(ocrResult.FullText);
+                    var request = new TranslationRequest
+                    {
+                        Text = ocrResult.FullText,
+                        TargetLanguage = "es",
+                        SourceContext = "code"
+                        //AdditionalInstructions = TxtExtraInstructions.Text
+                    };
+
+                    var traduccion = await _translationService.TranslateAsync(request);
+                    MessageBox.Show($"Texto traducido:\n{traduccion}");
                 }
 
-                MessageBox.Show($"Texto detectado:\n{ocrResult.FullText}");
             }
         }
     }
