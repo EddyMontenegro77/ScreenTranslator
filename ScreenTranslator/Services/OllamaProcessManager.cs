@@ -1,10 +1,10 @@
+using ScreenTranslator.Models.Translation;
 using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace ScreenTranslator.Services
 {
@@ -151,6 +151,25 @@ namespace ScreenTranslator.Services
 
             throw new TimeoutException(
                 $"Ollama no respondió dentro de {timeoutSeconds} segundos.");
+        }
+
+        public async Task<List<string>> GetAvailableModelsAsync()
+        {
+            try
+            {
+                using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(5) };
+                var response = await client.GetAsync("http://localhost:11434/api/tags");
+                response.EnsureSuccessStatusCode();
+
+                var body = await response.Content.ReadAsStringAsync();
+                var result = JsonSerializer.Deserialize<OllamaTagsResponse>(body);
+
+                return result?.Models.Select(m => m.Name).ToList() ?? new List<string>();
+            }
+            catch
+            {
+                return new List<string>();
+            }
         }
 
         public void Dispose()

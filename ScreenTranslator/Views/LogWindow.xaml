@@ -1,0 +1,15 @@
+<Window x:Class="ScreenTranslator.Views.LogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Translation Log"
+        Width="600" Height="400">
+    <DataGrid ItemsSource="{Binding}"
+              AutoGenerateColumns="False"
+              IsReadOnly="True">
+        <DataGrid.Columns>
+            <DataGridTextColumn Header="#" Binding="{Binding Id}" Width="40"/>
+            <DataGridTextColumn Header="Detected Text" Binding="{Binding DetectedText}" Width="*"/>
+            <DataGridTextColumn Header="Translation" Binding="{Binding Translation}" Width="*"/>
+        </DataGrid.Columns>
+    </DataGrid>
+</Window>

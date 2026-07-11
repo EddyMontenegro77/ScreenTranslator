@@ -1,0 +1,149 @@
+<Window x:Class="ScreenTranslator.Views.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:ScreenTranslator.Data"
+        xmlns:helpers="clr-namespace:ScreenTranslator.Helpers"
+        Title="Settings"
+        Width="500"
+        Height="680">
+
+    <Window.Resources>
+        <helpers:HexToBrushConverter x:Key="HexToBrushConverter"/>
+    </Window.Resources>
+
+    <ScrollViewer>
+        <StackPanel Margin="20">
+
+            <TextBlock Text="Target Language"
+                       FontWeight="Bold"/>
+
+            <ComboBox Margin="0,5,0,15"
+                      ItemsSource="{Binding Source={x:Static local:Languages.Available}}"
+                      SelectedValue="{Binding Config.TargetLanguage}"
+                      DisplayMemberPath="Key"
+                      SelectedValuePath="Key"/>
+
+
+            <TextBlock Text="Ollama Model"
+                       FontWeight="Bold"/>
+
+            <ComboBox ItemsSource="{Binding AvailableModels}"
+                      SelectedItem="{Binding Config.OllamaModel}"
+                      Margin="0,5,0,15"/>
+
+
+            <TextBlock Text="Source Content"
+                       FontWeight="Bold"/>
+
+            <TextBox Margin="0,5,0,15"
+                      Text="{Binding Config.SourceContent}"/>
+
+
+            <TextBlock Text="Additional Instructions"
+                       FontWeight="Bold"/>
+
+            <TextBox Margin="0,5,0,15"
+                     Height="80"
+                     AcceptsReturn="True"
+                     TextWrapping="Wrap"
+                     Text="{Binding Config.AdditionalInstructions}"/>
+
+
+            <TextBlock Text="Pre Processing"
+                       FontWeight="Bold"/>
+
+            <CheckBox Content="Upscale"
+                      IsChecked="{Binding Config.PreProcessOptionUpscale}"
+                      Margin="0,5"/>
+
+            <CheckBox Content="Gray Scale"
+                      IsChecked="{Binding Config.PreProcessOptionGrayScale}"
+                      Margin="0,5"/>
+
+            <CheckBox Content="Binarize"
+                      IsChecked="{Binding Config.PreProcessOptionBinarize}"
+                      Margin="0,5"/>
+
+
+            <TextBlock Text="Translation Font Size"
+                       FontWeight="Bold"
+                       Margin="0,15,0,0"/>
+
+            <TextBox Text="{Binding Config.TranslationFontSize}"
+                     Margin="0,5,0,15"/>
+
+
+            <TextBlock Text="Contrast Presets"
+                       FontWeight="Bold"/>
+
+            <ComboBox x:Name="CmbContrastPresets"
+                      Margin="0,5,0,15"
+                      SelectionChanged="CmbContrastPresets_SelectionChanged">
+                <ComboBoxItem Content="Custom" Tag=""/>
+                <ComboBoxItem Content="White on Black" Tag="#FFFFFFFF|#FF000000"/>
+                <ComboBoxItem Content="Black on White" Tag="#FF000000|#FFFFFFFF"/>
+                <ComboBoxItem Content="Yellow on Black" Tag="#FFFFFF00|#FF000000"/>
+                <ComboBoxItem Content="Black on Yellow" Tag="#FF000000|#FFFFFF00"/>
+                <ComboBoxItem Content="White on Dark Gray" Tag="#FFFFFFFF|#FF2B2B2B"/>
+            </ComboBox>
+
+
+            <TextBlock Text="Translation Font Color"
+                       FontWeight="Bold"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,15">
+                <Border Width="30" Height="30"
+                        BorderBrush="Gray" BorderThickness="1"
+                        Background="{Binding Config.TranslationFontColor, Converter={StaticResource HexToBrushConverter}}"
+                        Margin="0,0,10,0"/>
+
+                <ComboBox x:Name="CmbFontColor"
+                          Width="150"
+                          SelectionChanged="CmbFontColor_SelectionChanged">
+                    <ComboBoxItem Content="White" Tag="#FFFFFFFF"/>
+                    <ComboBoxItem Content="Black" Tag="#FF000000"/>
+                    <ComboBoxItem Content="Yellow" Tag="#FFFFFF00"/>
+                    <ComboBoxItem Content="Red" Tag="#FFFF0000"/>
+                    <ComboBoxItem Content="Cyan" Tag="#FF00FFFF"/>
+                    <ComboBoxItem Content="Light Gray" Tag="#FFD3D3D3"/>
+                </ComboBox>
+            </StackPanel>
+
+
+            <TextBlock Text="Translation Background Color"
+                       FontWeight="Bold"/>
+
+            <StackPanel Orientation="Horizontal" Margin="0,5,0,15">
+                <Border Width="30" Height="30"
+                        BorderBrush="Gray" BorderThickness="1"
+                        Background="{Binding Config.TranslationBackgroundColor, Converter={StaticResource HexToBrushConverter}}"
+                        Margin="0,0,10,0"/>
+
+                <ComboBox x:Name="CmbBackgroundColor"
+                          Width="150"
+                          SelectionChanged="CmbBackgroundColor_SelectionChanged">
+                    <ComboBoxItem Content="Black" Tag="#FF000000"/>
+                    <ComboBoxItem Content="White" Tag="#FFFFFFFF"/>
+                    <ComboBoxItem Content="Dark Gray" Tag="#FF2B2B2B"/>
+                    <ComboBoxItem Content="Navy" Tag="#FF001F3F"/>
+                    <ComboBoxItem Content="Dark Red" Tag="#FF4A0000"/>
+                    <ComboBoxItem Content="Transparent Black" Tag="#AA000000"/>
+                </ComboBox>
+            </StackPanel>
+
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,0,0">
+                <Button Content="Reset default"
+                        Width="100"
+                        Margin="0,0,10,0"
+                        Click="Reset_Click"/>
+
+                <Button Content="Save"
+                        Width="100"
+                        Click="Save_Click"/>
+            </StackPanel>
+
+        </StackPanel>
+    </ScrollViewer>
+
+</Window>

@@ -1,15 +1,33 @@
 ﻿using ScreenTranslator.Services;
 using System.Windows;
+using H.NotifyIcon;
 
 namespace ScreenTranslator
 {
     public partial class App : Application
     {
         public static OllamaProcessManager OllamaManager { get; } = new();
+        private TaskbarIcon? _trayIcon;
+
+        private void TrayIcon_LeftClick(object sender, RoutedEventArgs e)
+        {
+
+            var mainWindow = Current.Windows
+                .OfType<MainWindow>()
+                .FirstOrDefault();
+
+            if (mainWindow != null)
+            {
+                mainWindow.RestoreFromTray();
+            }
+        }
 
         protected override async void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
+
+            _trayIcon = (TaskbarIcon)Resources["TrayIcon"];
+            _trayIcon.ForceCreate();
 
             try
             {

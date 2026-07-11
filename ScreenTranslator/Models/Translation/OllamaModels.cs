@@ -43,4 +43,19 @@ namespace ScreenTranslator.Models.Translation
         [JsonPropertyName("temperature")]
         public double Temperature { get; set; } = 0.2;
     }
+
+    public class OllamaModelInfo
+    {
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+
+        [JsonPropertyName("size")]
+        public long Size { get; set; }
+    }
+
+    public class OllamaTagsResponse
+    {
+        [JsonPropertyName("models")]
+        public List<OllamaModelInfo> Models { get; set; } = new();
+    }
 }

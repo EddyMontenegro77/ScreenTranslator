@@ -8,7 +8,8 @@
         Topmost="True"
         SizeToContent="WidthAndHeight"
         ResizeMode="NoResize">
-        <Border Background="#CC000000"
+        <Border x:Name="RootBorder"
+                Background="#CC000000"
 				CornerRadius="6"
 				Padding="6"
 				MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">

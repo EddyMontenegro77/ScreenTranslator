@@ -6,8 +6,33 @@
         xmlns:local="clr-namespace:ScreenTranslator"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
+    
+    
     <Grid>
         <TextBlock Text="ScreenTranslator" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24"/>
-        <Button Content="Capture" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="60" FontSize="24" Click="BtnCapture_Click"/>
+        <StackPanel HorizontalAlignment="Center"
+                VerticalAlignment="Center" Margin="0,0,0,10">
+
+            <Button Content="Capture"
+                Width="200"
+                Height="60"
+                FontSize="24"
+                Margin="0,0,0,10"
+                Click="BtnCapture_Click"/>
+
+            <Button Content="Settings"
+                Width="200"
+                Height="40"
+                FontSize="20"
+                Margin="0,0,0,5"
+                Click="Settings_Click"/>
+            
+            <Button Content="Log"
+                    Width="200"
+                    Height="40"
+                    FontSize="20"
+                    Click="Log_Click"/>
+
+        </StackPanel>
     </Grid>
 </Window>
