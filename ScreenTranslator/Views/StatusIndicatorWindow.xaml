@@ -4,31 +4,26 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         AllowsTransparency="True"
-        Background="#01000000"
+        Background="Transparent"
         Topmost="True"
         ShowInTaskbar="False"
-        WindowState="Maximized">
-	
-        <Grid>
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="Manual">
 
-            <StackPanel HorizontalAlignment="Right"
-                        VerticalAlignment="Bottom"
-                        Margin="0,0,30,30">
+    <Grid>
+        <StackPanel Margin="20">
+            <TextBlock x:Name="TxtStatus"
+                       Margin="0,0,0,8"
+                       FontSize="16"
+                       FontWeight="SemiBold"
+                       Foreground="White"
+                       Text="Procesando..." />
 
-                <TextBlock x:Name="TxtStatus"
-                           Margin="0,0,0,8"
-                           FontSize="16"
-                           FontWeight="SemiBold"
-                           Foreground="White"
-                           Text="Procesando..." />
-
-                <ProgressBar x:Name="ProgressTranslate"
-                             Width="200"
-                             Height="25"
-                             IsIndeterminate="True"
-                             Visibility="Collapsed"/>
-
-            </StackPanel>
-
-        </Grid>
+            <ProgressBar x:Name="ProgressTranslate"
+                         Width="200"
+                         Height="25"
+                         IsIndeterminate="True"
+                         Visibility="Collapsed"/>
+        </StackPanel>
+    </Grid>
 </Window>

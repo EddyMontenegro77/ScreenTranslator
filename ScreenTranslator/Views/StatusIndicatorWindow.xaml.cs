@@ -7,6 +7,14 @@ namespace ScreenTranslator.Views
         public StatusIndicatorWindow()
         {
             InitializeComponent();
+            Loaded += (_, _) => PositionBottomRight();
+        }
+
+        private void PositionBottomRight()
+        {
+            var workArea = SystemParameters.WorkArea;
+            Left = workArea.Right - Width - 30;
+            Top = workArea.Bottom - Height - 30;
         }
 
         public string Status

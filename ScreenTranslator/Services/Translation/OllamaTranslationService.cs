@@ -30,7 +30,7 @@ namespace ScreenTranslator.Services.Translation
                 Model = _model,
                 Think = false,
                 Stream = false,
-                Options = new OllamaOptions { Temperature = 0.2 },
+                Options = new OllamaOptions { Temperature = 0.2, NumCtx=2048 },
                 Messages = new List<OllamaChatMessage>
                 {
                     new() { Role = "system", Content = BuildSystemPrompt(request.TargetLanguage) },
