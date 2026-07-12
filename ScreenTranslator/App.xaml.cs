@@ -7,6 +7,7 @@ namespace ScreenTranslator
     public partial class App : Application
     {
         public static OllamaProcessManager OllamaManager { get; } = new();
+        public static GlobalHotkeyService? _globalHotkeyService { get; private set; }
         private TaskbarIcon? _trayIcon;
 
         private void TrayIcon_LeftClick(object sender, RoutedEventArgs e)
@@ -44,9 +45,17 @@ namespace ScreenTranslator
             }
         }
 
+        private void TrayIcon_Exit(object sender, RoutedEventArgs e)
+        {
+            var mainWindow = Current.Windows.OfType<MainWindow>().FirstOrDefault();
+            mainWindow?.ExitApplication();
+        }
+
         protected override void OnExit(ExitEventArgs e)
         {
             OllamaManager.Dispose();
+            _globalHotkeyService?.Dispose();
+            _trayIcon?.Dispose();
             base.OnExit(e);
         }
     }

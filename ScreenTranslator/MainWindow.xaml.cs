@@ -20,6 +20,9 @@ namespace ScreenTranslator
         private readonly StatusIndicatorWindow _status = new();
         private LogWindow? _logWindow;
 
+        private bool _isExiting = false;
+        private bool _suppressTrayOnMinimize = false;
+
         private UserConfig _userConfig;
         private ITranslationService _translationService = null!;
         private CaptureWorkflowService _workflowService = null!;
@@ -51,12 +54,9 @@ namespace ScreenTranslator
         {
             base.OnStateChanged(e);
 
-            if (WindowState == WindowState.Minimized && IsLoaded)
+            if (WindowState == WindowState.Minimized && IsLoaded && !_suppressTrayOnMinimize)
             {
-                Dispatcher.BeginInvoke(() =>
-                {
-                    Hide();
-                });
+                Dispatcher.BeginInvoke(() => Hide());
             }
         }
 
@@ -73,6 +73,25 @@ namespace ScreenTranslator
                 Topmost = true;
                 Topmost = false;
             });
+        }
+
+        protected override void OnClosing(System.ComponentModel.CancelEventArgs e)
+        {
+            if (!_isExiting)
+            {
+                e.Cancel = true;
+                WindowState = WindowState.Minimized;
+            }
+            else
+            {
+                base.OnClosing(e);
+            }
+        }
+
+        public void ExitApplication()
+        {
+            _isExiting = true;
+            System.Windows.Application.Current.Shutdown();
         }
 
         protected override void OnClosed(EventArgs e)
@@ -95,9 +114,11 @@ namespace ScreenTranslator
         private async void BtnCapture_Click(object sender, RoutedEventArgs e)
         {
             var overlay = new SelectionOverlayWindow();
+            _suppressTrayOnMinimize = true;
             WindowState = WindowState.Minimized;
 
             bool? result = overlay.ShowDialog();
+            _suppressTrayOnMinimize = false;
 
             if (result != true || overlay.WasCancelled)
                 return;

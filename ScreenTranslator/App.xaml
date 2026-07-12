@@ -9,6 +9,13 @@
             x:Key="TrayIcon"
             IconSource="/ScreenTranslator;component/Assets/niholator.ico"
             ToolTipText="ScreenTranslator"
-            TrayMouseDoubleClick="TrayIcon_LeftClick"/>
+            TrayMouseDoubleClick="TrayIcon_LeftClick">
+            <tb:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Show" Click="TrayIcon_LeftClick"/>
+                    <MenuItem Header="Exit" Click="TrayIcon_Exit"/>
+                </ContextMenu>
+            </tb:TaskbarIcon.ContextMenu>
+        </tb:TaskbarIcon>
     </Application.Resources>
 </Application>
