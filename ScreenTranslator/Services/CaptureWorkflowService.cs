@@ -97,6 +97,9 @@ namespace ScreenTranslator.Services
             var regionOcr = await _ocrService.ExtractTextAsync(regionBitmap);
             string detectedText = !string.IsNullOrEmpty(regionOcr.FullText) ? regionOcr.FullText : block.Text;
 
+            if(_userConfig.CopyLastToClipboard)
+                CopyToClipboardService.CopyTextToClipboard(detectedText);
+
             if (string.IsNullOrWhiteSpace(detectedText))
                 return;
 

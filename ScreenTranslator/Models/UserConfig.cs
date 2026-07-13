@@ -6,10 +6,12 @@ namespace ScreenTranslator.Models
 {
     public class UserConfig
     {
+        public string SourceLanguage { get; set; } = "ja";
         public string TargetLanguage { get; set; } = "Spanish";
         public string OllamaModel { get; set; } = "qwen3.5:9b";
         public string SourceContent { get; set; } = "Manga";
         public string AdditionalInstructions { get; set; } = string.Empty;
+        public bool CopyLastToClipboard { get; set; } = true;
 
         public bool PreProcessOptionUpscale { get; set; } = true;
         public bool PreProcessOptionGrayScale { get; set; } = true;

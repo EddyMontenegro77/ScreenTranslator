@@ -14,6 +14,15 @@
     <ScrollViewer>
         <StackPanel Margin="20">
 
+            <TextBlock Text="Source Language"
+                       FontWeight="Bold"/>
+
+            <ComboBox
+                ItemsSource="{Binding Source={x:Static local:Languages.Available}}"
+                DisplayMemberPath="Key"
+                SelectedValuePath="Value"
+                SelectedValue="{Binding Config.SourceLanguage}" />
+
             <TextBlock Text="Target Language"
                        FontWeight="Bold"/>
 
@@ -48,6 +57,12 @@
                      TextWrapping="Wrap"
                      Text="{Binding Config.AdditionalInstructions}"/>
 
+            <TextBlock Text="Copy to Clipboard"
+            FontWeight="Bold"/>
+            
+            <CheckBox Content="Copy last detection's text to clipboard"
+            IsChecked="{Binding Config.CopyLastToClipboard}"
+            Margin="0,5"/>
 
             <TextBlock Text="Pre Processing"
                        FontWeight="Bold"/>

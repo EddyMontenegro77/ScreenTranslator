@@ -14,7 +14,7 @@ namespace ScreenTranslator
     public partial class MainWindow : Window
     {
         private readonly GlobalHotkeyService _hotkeyService = new();
-        private readonly IOcrService _ocrService = new WindowsOcrService("ja");
+        private IOcrService _ocrService = null!;
         private readonly UserConfigService _userConfigService = new();
         private readonly ObservableCollection<CaptureLogEntry> _captureLog = new();
         private readonly StatusIndicatorWindow _status = new();
@@ -38,6 +38,7 @@ namespace ScreenTranslator
         // Rebuils in case of model change or config change
         private void RebuildServices()
         {
+            _ocrService = new WindowsOcrService(_userConfig.SourceLanguage);
             _translationService = new OllamaTranslationService(App.OllamaManager, _userConfig.OllamaModel);
             _workflowService = new CaptureWorkflowService(_ocrService, _translationService, _userConfig);
         }
