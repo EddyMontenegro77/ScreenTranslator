@@ -142,5 +142,10 @@ namespace ScreenTranslator
                 _logWindow.Activate();
             }
         }
+        private void HowToUse_Click(object sender, RoutedEventArgs e)
+        {
+            var howToUse = new HowToUseWindow { Owner = this };
+            howToUse.ShowDialog();
+        }
     }
 }

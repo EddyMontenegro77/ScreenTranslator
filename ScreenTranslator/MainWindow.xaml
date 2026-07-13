@@ -31,7 +31,14 @@
                     Width="200"
                     Height="40"
                     FontSize="20"
+                    Margin="0,0,0,5"
                     Click="Log_Click"/>
+            <Button Content="How to Use"
+                    Width="200"
+                    Height="40"
+                    FontSize="20"
+                    Margin="0,0,0,5"
+                    Click="HowToUse_Click"/>
 
         </StackPanel>
     </Grid>
