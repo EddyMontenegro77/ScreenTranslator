@@ -7,14 +7,19 @@ namespace ScreenTranslator.Views
 {
     public partial class TranslationOverlayWindow : Window
     {
+
+        private readonly bool _isVertical;
         public TranslationOverlayWindow(
             string text,
             Rect placement,
             DrawingColor backgroundColor,
             DrawingColor fontColor,
+            bool isVertical,
             double fontSize)
         {
             InitializeComponent();
+
+            _isVertical = isVertical;
 
             TxtTranslation.Text = text ?? string.Empty;
             TxtTranslation.FontSize = fontSize;
@@ -24,14 +29,25 @@ namespace ScreenTranslator.Views
             Left = placement.X;
             Top = placement.Y;
 
-            if (placement.Width > 0)
+            if (_isVertical)
             {
-                Width = placement.Width;
-                TxtTranslation.MaxWidth = placement.Width;
-            }
 
-            if (placement.Height > 0)
-                Height = placement.Height;
+                Width = Math.Max(300, placement.Width);
+                Height = Math.Max(placement.Height, 80);
+
+                TxtTranslation.MaxWidth = 300;
+            }
+            else
+            {
+                if (placement.Width > 0)
+                {
+                    Width = placement.Width;
+                    TxtTranslation.MaxWidth = placement.Width;
+                }
+
+                if (placement.Height > 0)
+                    Height = placement.Height;
+            }
 
             RootBorder.Background = new SolidColorBrush(
                 Color.FromArgb(backgroundColor.A, backgroundColor.R, backgroundColor.G, backgroundColor.B));

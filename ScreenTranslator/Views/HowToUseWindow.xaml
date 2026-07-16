@@ -8,37 +8,45 @@
         Style="{StaticResource MainWindowStyle}"
         ResizeMode="NoResize">
 
-    <StackPanel Margin="20">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <StackPanel Margin="20">
 
-        <TextBlock Text="ScreenTranslator - Quick Guide"
-                   FontSize="18"
-                   FontWeight="Bold"
-                   Margin="0,0,0,15"/>
+            <TextBlock Text="ScreenTranslator - Quick Guide"
+                       FontSize="18"
+                       FontWeight="Bold"
+                       Margin="0,0,0,15"/>
 
-        <TextBlock Text="1. Capture" FontWeight="Bold" Margin="0,0,0,4"/>
-        <TextBlock Text="Press Ctrl+Shift+T, or click the Capture button, then drag to select an area of the screen containing the source text."
-                   TextWrapping="Wrap" Margin="0,0,0,12"/>
+            <TextBlock Text="1. Capture" FontWeight="Bold" Margin="0,0,0,4"/>
+            <TextBlock Text="Press Ctrl+Shift+T, or click the Capture button, then drag to select an area of the screen containing the source text."
+                       TextWrapping="Wrap" Margin="0,0,0,12"/>
 
-        <TextBlock Text="2. Translation" FontWeight="Bold" Margin="0,0,0,4"/>
-        <TextBlock Text="The app will detect text blocks, translate each one, and show the results as overlays near the original text."
-                   TextWrapping="Wrap" Margin="0,0,0,12"/>
+            <TextBlock Text="2. Translation" FontWeight="Bold" Margin="0,0,0,4"/>
+            <TextBlock Text="The app will detect text blocks, translate each one, and show the results as overlays near the original text."
+                       TextWrapping="Wrap" Margin="0,0,0,12"/>
 
-        <TextBlock Text="3. Overlays" FontWeight="Bold" Margin="0,0,0,4"/>
-        <TextBlock Text="Drag the translation boxes to reposition them, or click the X to close one."
-                   TextWrapping="Wrap" Margin="0,0,0,12"/>
+            <TextBlock Text="3. Overlays" FontWeight="Bold" Margin="0,0,0,4"/>
+            <TextBlock Text="Drag the translation boxes to reposition them, or click the X to close one."
+                       TextWrapping="Wrap" Margin="0,0,0,12"/>
 
-        <TextBlock Text="4. Settings" FontWeight="Bold" Margin="0,0,0,4"/>
-        <TextBlock Text="Choose your prefered Ollama model for translating, target language, appearance (font/background color) and more configurations from the Settings window."
-                   TextWrapping="Wrap" Margin="0,0,0,12"/>
+            <TextBlock Text="4. Settings" FontWeight="Bold" Margin="0,0,0,4"/>
+            <TextBlock Text="Choose your prefered Ollama model for translating, target language, appearance (font/background color) and more configurations from the Settings window."
+                       TextWrapping="Wrap" Margin="0,0,0,12"/>
 
-        <TextBlock Text="5. System Tray" FontWeight="Bold" Margin="0,0,0,4"/>
-        <TextBlock Text="Closing the main window sends it to the tray. Right-click the tray icon to exit the app completely. You can also Double-click the tray icon to open it back again."
-                   TextWrapping="Wrap" Margin="0,0,0,15"/>
+            <TextBlock Text="5. System Tray" FontWeight="Bold" Margin="0,0,0,4"/>
+            <TextBlock Text="Closing the main window sends it to the tray. Right-click the tray icon to exit the app completely. You can also Double-click the tray icon to open it back again."
+                       TextWrapping="Wrap" Margin="0,0,0,15"/>
 
-        <Button Content="Close"
-                Width="100"
-                HorizontalAlignment="Right"
-                Click="Close_Click"/>
+            <TextBlock Text="Notes" FontWeight="Bold" Margin="0,0,0,4"/>
+            <TextBlock Text="• The first capture may take a little longer while the app initializes its services."
+                       TextWrapping="Wrap" Margin="0,0,0,4"/>
+            <TextBlock Text="• Vertical text (such as Japanese vertical writing) will be displayed in a horizontal translation window for better readability."
+                       TextWrapping="Wrap" Margin="0,0,0,15"/>
 
-    </StackPanel>
+            <Button Content="Close"
+                    Width="100"
+                    HorizontalAlignment="Right"
+                    Click="Close_Click"/>
+
+        </StackPanel>
+    </ScrollViewer>
 </Window>

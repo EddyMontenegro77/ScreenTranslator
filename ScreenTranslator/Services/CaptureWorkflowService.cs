@@ -115,6 +115,8 @@ namespace ScreenTranslator.Services
 
             var dipRect = CoordinateMapper.MapOcrRectToDip(
                 block.BoundingBox, physicalRect, processedSize, captureSize, ownerWindow);
+            
+            bool isVertical = block.BoundingBox.Height > block.BoundingBox.Width * 2;
 
             captureLog.Add(new CaptureLogEntry
             {
@@ -131,6 +133,7 @@ namespace ScreenTranslator.Services
                 dipRect,
                 backgroundColor,
                 fontColor,
+                isVertical,
                 _userConfig.TranslationFontSize)
             {
                 Owner = ownerWindow,

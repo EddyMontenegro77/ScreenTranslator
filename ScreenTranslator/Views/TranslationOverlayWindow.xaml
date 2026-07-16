@@ -43,10 +43,10 @@
                 </Button>
 
                 <TextBlock x:Name="TxtTranslation"
-                           Foreground="White"
-                           TextWrapping="Wrap"
-                           MaxWidth="400"
-                           Margin="0,24,0,0"/>
-            </Grid>
+                   Foreground="White"
+                   TextWrapping="Wrap"
+                   MaxWidth="400"
+                   Margin="0,24,0,0"/>
+        </Grid>
         </Border>
 </Window>

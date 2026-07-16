@@ -6,42 +6,86 @@
         xmlns:local="clr-namespace:ScreenTranslator"
         mc:Ignorable="d"
         Style="{StaticResource MainWindowStyle}"
-        Title="MainWindow" Height="450" Width="800"
-        >
-    
-    
+        Title="ScreenTranslator"
+        Height="520"
+        Width="420"
+        WindowStartupLocation="CenterScreen">
+
     <Grid>
-        <TextBlock Text="ScreenTranslator" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24"/>
-        <StackPanel HorizontalAlignment="Center"
-                VerticalAlignment="Center" Margin="0,0,0,10">
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0"
+                    HorizontalAlignment="Center"
+                    Margin="0,35,0,20">
+
+            <TextBlock Text="ScreenTranslator"
+                       FontSize="32"
+                       FontWeight="Bold"
+                       HorizontalAlignment="Center"/>
+
+            <TextBlock Text="Translate text directly from your screen"
+                       FontSize="14"
+                       Opacity="0.7"
+                       HorizontalAlignment="Center"
+                       Margin="0,8,0,0"/>
+
+        </StackPanel>
+
+
+
+        <!-- Main Actions -->
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Width="240">
+
 
             <Button Content="Capture"
-                Width="200"
-                Height="60"
-                FontSize="24"
-                Margin="0,0,0,10"
-                Click="BtnCapture_Click"/>
+                    Height="65"
+                    FontSize="24"
+                    Margin="0,0,0,15"
+                    Click="BtnCapture_Click"/>
+
 
             <Button Content="Settings"
-                Width="200"
-                Height="40"
-                FontSize="20"
-                Margin="0,0,0,5"
-                Click="Settings_Click"/>
-            
-            <Button Content="Log"
-                    Width="200"
-                    Height="40"
-                    FontSize="20"
-                    Margin="0,0,0,5"
+                    Height="45"
+                    FontSize="18"
+                    Margin="0,0,0,10"
+                    Click="Settings_Click"/>
+
+
+            <Button Content="Translation Log"
+                    Height="45"
+                    FontSize="18"
+                    Margin="0,0,0,10"
                     Click="Log_Click"/>
+
+
             <Button Content="How to Use"
-                    Width="200"
-                    Height="40"
-                    FontSize="20"
-                    Margin="0,0,0,5"
+                    Height="45"
+                    FontSize="18"
                     Click="HowToUse_Click"/>
 
         </StackPanel>
+
+
+
+        <!-- Footer -->
+        <TextBlock Grid.Row="2"
+                   Text="Ctrl + Shift + T  •  Screen capture shortcut"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"
+                   FontSize="12"
+                   Opacity="0.6"/>
+
+
     </Grid>
+
 </Window>
