@@ -4,18 +4,47 @@
              xmlns:local="clr-namespace:ScreenTranslator"
              xmlns:tb="clr-namespace:H.NotifyIcon;assembly=H.NotifyIcon.Wpf"
              StartupUri="MainWindow.xaml">
+
+
     <Application.Resources>
-        <tb:TaskbarIcon
-            x:Key="TrayIcon"
-            IconSource="/ScreenTranslator;component/Assets/niholator.ico"
-            ToolTipText="ScreenTranslator"
-            TrayMouseDoubleClick="TrayIcon_LeftClick">
-            <tb:TaskbarIcon.ContextMenu>
-                <ContextMenu>
-                    <MenuItem Header="Show" Click="TrayIcon_LeftClick"/>
-                    <MenuItem Header="Exit" Click="TrayIcon_Exit"/>
-                </ContextMenu>
-            </tb:TaskbarIcon.ContextMenu>
-        </tb:TaskbarIcon>
+
+        <ResourceDictionary>
+
+            <ResourceDictionary.MergedDictionaries>
+
+                <ResourceDictionary Source="/Styles/Shared/Colors.xaml"/>
+                <ResourceDictionary Source="/Styles/Shared/Buttons.xaml"/>
+                <ResourceDictionary Source="/Styles/Shared/Windows.xaml"/>
+                <ResourceDictionary Source="/Styles/Shared/CheckBoxes.xaml"/>
+                <ResourceDictionary Source="/Styles/Shared/ComboBoxes.xaml"/>
+                <ResourceDictionary Source="/Styles/Shared/DataGrids.xaml"/>
+                <ResourceDictionary Source="/Styles/Shared/ScrollViewer.xaml"/>
+                <ResourceDictionary Source="/Styles/Shared/Sliders.xaml"/>
+                <ResourceDictionary Source="/Styles/Shared/TextBlocks.xaml"/>
+                <ResourceDictionary Source="/Styles/Shared/TextBoxes.xaml"/>
+
+            </ResourceDictionary.MergedDictionaries>
+
+            <tb:TaskbarIcon
+                x:Key="TrayIcon"
+                IconSource="/ScreenTranslator;component/Assets/niholator.ico"
+                ToolTipText="ScreenTranslator"
+                TrayMouseDoubleClick="TrayIcon_LeftClick">
+
+                <tb:TaskbarIcon.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Show"
+                                  Click="TrayIcon_LeftClick"/>
+
+                        <MenuItem Header="Exit"
+                                  Click="TrayIcon_Exit"/>
+                    </ContextMenu>
+                </tb:TaskbarIcon.ContextMenu>
+
+            </tb:TaskbarIcon>
+
+        </ResourceDictionary>
+
     </Application.Resources>
+
 </Application>

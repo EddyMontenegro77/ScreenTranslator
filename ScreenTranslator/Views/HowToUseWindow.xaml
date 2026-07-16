@@ -5,6 +5,7 @@
         Width="450"
         SizeToContent="Height"
         WindowStartupLocation="CenterOwner"
+        Style="{StaticResource MainWindowStyle}"
         ResizeMode="NoResize">
 
     <StackPanel Margin="20">

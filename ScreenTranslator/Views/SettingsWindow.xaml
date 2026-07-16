@@ -4,6 +4,7 @@
         xmlns:local="clr-namespace:ScreenTranslator.Data"
         xmlns:helpers="clr-namespace:ScreenTranslator.Helpers"
         Title="Settings"
+        Style="{StaticResource MainWindowStyle}"
         Width="500"
         Height="680">
 

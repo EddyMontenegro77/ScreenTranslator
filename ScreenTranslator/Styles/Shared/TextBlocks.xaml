@@ -1,0 +1,16 @@
+<ResourceDictionary
+xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource FontColor}"/>
+    </Style>
+
+    <Style x:Key="HeaderText" TargetType="TextBlock">
+        <Setter Property="Foreground" Value="{StaticResource FontColor}"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Margin" Value="0,10,0,4"/>
+    </Style>
+
+</ResourceDictionary>
