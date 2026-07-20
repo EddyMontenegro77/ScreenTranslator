@@ -4,6 +4,16 @@
         Title="Translation Log"
         Style="{StaticResource MainWindowStyle}"
         Width="700" Height="400">
+
+    <Window.Resources>
+        <Style x:Key="CompactButtonStyle" TargetType="Button">
+            <Setter Property="MinWidth" Value="0"/>
+            <Setter Property="Padding" Value="6,2"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="FontSize" Value="11"/>
+        </Style>
+    </Window.Resources>
+
     <DataGrid ItemsSource="{Binding}"
               AutoGenerateColumns="False"
               IsReadOnly="True">
@@ -12,16 +22,16 @@
             <DataGridTextColumn Header="Detected Text" Binding="{Binding DetectedText}" Width="*"/>
             <DataGridTextColumn Header="Translation" Binding="{Binding Translation}" Width="*"/>
 
-            <DataGridTemplateColumn Header="Copy" Width="140">
+            <DataGridTemplateColumn Header="Copy" Width="130">
                 <DataGridTemplateColumn.CellTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
                             <Button Content="Original"
-                                    Margin="2"
+                                    Style="{StaticResource CompactButtonStyle}"
                                     Tag="{Binding DetectedText}"
                                     Click="CopyOriginal_Click"/>
                             <Button Content="Translation"
-                                    Margin="2"
+                                    Style="{StaticResource CompactButtonStyle}"
                                     Tag="{Binding Translation}"
                                     Click="CopyTranslation_Click"/>
                         </StackPanel>

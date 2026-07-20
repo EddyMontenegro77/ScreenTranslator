@@ -32,7 +32,9 @@
                 TrayMouseDoubleClick="TrayIcon_LeftClick">
 
                 <tb:TaskbarIcon.ContextMenu>
-                    <ContextMenu>
+                    <ContextMenu
+                        Background="{StaticResource BackgroundColor}"
+                        Foreground="{StaticResource FontColor}">
                         <MenuItem Header="Show"
                                   Click="TrayIcon_LeftClick"/>
 

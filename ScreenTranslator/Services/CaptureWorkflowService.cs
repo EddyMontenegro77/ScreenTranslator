@@ -3,6 +3,7 @@ using ScreenTranslator.Models;
 using ScreenTranslator.Models.Translation;
 using ScreenTranslator.Views;
 using System.Collections.ObjectModel;
+using System.Net.Http;
 using System.Drawing;
 using System.Windows;
 using DrawingSize = System.Drawing.Size;
@@ -31,9 +32,19 @@ namespace ScreenTranslator.Services
         {
             status.Show();
             status.ProgressIndeterminate();
-            status.Status = "Capturing screen...";
+            status.Status = "Checking translation engine...";
             status.ShowProgress();
 
+            if (!await WaitForOllamaReadyAsync())
+            {
+                status.Status = "Translation engine not responding. Try again in a moment.";
+                await Task.Delay(10000);
+                status.HideProgress();
+                status.Hide();
+                return;
+            }
+
+            status.Status = "Capturing screen...";
             Bitmap capturedBitmap = ScreenCaptureService.CaptureScreen(physicalRect);
             Bitmap? processedBitmap = null;
 
@@ -141,6 +152,27 @@ namespace ScreenTranslator.Services
             };
 
             popup.Show();
+        }
+
+        private async Task<bool> WaitForOllamaReadyAsync(int maxAttempts = 3, int delayMs = 800)
+        {
+            for (int attempt = 0; attempt < maxAttempts; attempt++)
+            {
+                try
+                {
+                    using var client = new HttpClient { Timeout = TimeSpan.FromSeconds(2) };
+                    var response = await client.GetAsync("http://127.0.0.1:11434/api/tags");
+                    if (response.IsSuccessStatusCode) return true;
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine($"[OllamaCheck] Attempt {attempt + 1} failed: {ex.GetType().Name} - {ex.Message}");
+                }
+
+                if (attempt < maxAttempts - 1)
+                    await Task.Delay(delayMs);
+            }
+            return false;
         }
     }
 }

@@ -48,6 +48,7 @@
 
 
             <Button Content="Capture"
+                    Background="{StaticResource DangerColor}"
                     Height="65"
                     FontSize="24"
                     Margin="0,0,0,15"

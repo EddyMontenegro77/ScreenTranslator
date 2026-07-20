@@ -9,7 +9,7 @@ namespace ScreenTranslator.Services.Translation
         private readonly HttpClient _httpClient;
         private readonly string _model;
         private readonly OllamaProcessManager _processManager;
-        private const string OllamaChatUrl = "http://localhost:11434/api/chat";
+        private const string OllamaChatUrl = "http://127.0.0.1:11434/api/chat";
 
         public OllamaTranslationService(OllamaProcessManager processManager, string model = "qwen3.5:9b")
         {
