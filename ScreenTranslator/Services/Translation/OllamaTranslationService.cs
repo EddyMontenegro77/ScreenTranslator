@@ -47,7 +47,7 @@ namespace ScreenTranslator.Services.Translation
                 if (!httpResponse.IsSuccessStatusCode)
                 {
                     throw new InvalidOperationException(
-                        $"Ollama respondió {httpResponse.StatusCode}: {body}");
+                        $"Ollama responded {httpResponse.StatusCode}: {body}");
                 }
 
                 var result = System.Text.Json.JsonSerializer.Deserialize<OllamaChatResponse>(body);
@@ -57,12 +57,12 @@ namespace ScreenTranslator.Services.Translation
             catch (TaskCanceledException ex)
             {
                 throw new InvalidOperationException(
-                    "La traducción tardó demasiado (timeout).", ex);
+                    "Translation took too long (timeout).", ex);
             }
             catch (Exception ex)
             {
                 throw new InvalidOperationException(
-                    "Error al comunicarse con Ollama.", ex);
+                    "Error while attempting to communicate with Ollama.", ex);
             }
         }
 

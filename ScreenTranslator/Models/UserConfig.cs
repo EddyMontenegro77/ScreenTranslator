@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ScreenTranslator.Models
+﻿namespace ScreenTranslator.Models
 {
     public class UserConfig
     {

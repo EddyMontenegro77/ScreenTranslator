@@ -1,21 +1,12 @@
-// Requirements:
-// - Windows SDK (Developer Pack) TargetPlatformVersion in .csproj
-// - PMicrosoft.Windows.SDK.Contracts y Microsoft.Windows.CsWinRT
-// - Ejecutar 'dotnet restore' y disponer de las proyecciones WinRT (CsWinRT) en el entorno.
-
-using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 using ScreenTranslator.Models;
 using System.Windows;
 
 using Windows.Graphics.Imaging;
 using Windows.Media.Ocr;
 using Windows.Globalization;
-using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace ScreenTranslator.Services.OCRs
 {

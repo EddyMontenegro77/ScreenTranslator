@@ -1,5 +1,4 @@
 using ScreenTranslator.Models.Translation;
-using System;
 using System.Diagnostics;
 using System.IO;
 using System.Net.Http;
@@ -20,8 +19,8 @@ namespace ScreenTranslator.Services
 
         public async Task EnsureRunningAsync(int timeoutSeconds = 30)
         {
-            // Evita que dos llamadas simultáneas (ej: dos capturas rápidas) intenten
-            // arrancar el proceso al mismo tiempo
+            // Avoid having simultaneous calls (ex. from multiple captures in a short time).
+            // start the process at the same time.
             await _lock.WaitAsync();
             try
             {
@@ -85,14 +84,14 @@ namespace ScreenTranslator.Services
             catch (Exception ex)
             {
                 throw new InvalidOperationException(
-                    $"No se pudo iniciar Ollama desde '{executablePath}'. " +
-                    "¿Está instalado correctamente?", ex);
+                    $"Ollama could not be initiated from: '{executablePath}'. " +
+                    "Is it installed correctly?", ex);
             }
         }
 
         private string FindOllamaExecutable()
         {
-            // 1. Ruta estándar de instalación de Ollama en Windows
+            // 1. Standard installation path for Ollama on Windows
             string standardPath = Path.Combine(
                 Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
                 "Programs", "Ollama", "ollama.exe");
@@ -100,7 +99,7 @@ namespace ScreenTranslator.Services
             if (File.Exists(standardPath))
                 return standardPath;
 
-            // 2. Si no está ahí, confiamos en que esté en el PATH del sistema
+            // 2. If not found, check if it's in the PATH
             return "ollama.exe";
         }
 
@@ -113,9 +112,9 @@ namespace ScreenTranslator.Services
             {
                 if (_process is { HasExited: true })
                 {
-                    // Si el proceso terminó inmediatamente, es posible que otra instancia
-                    // haya ocupado el puerto simultáneamente. Reintentar varias veces
-                    // a la espera de que el servicio responda antes de fallar.
+                    // If the process has exited, it might be because another instance
+                    // might be using the port. Let's try a few more times to check if it's running
+                    // waiting before throwing an exception.
                     const int recheckAttempts = 5;
                     const int recheckDelayMs = 200;
 
@@ -136,9 +135,9 @@ namespace ScreenTranslator.Services
                         extra = "STDOUT: " + stdout;
 
                     throw new InvalidOperationException(
-                        $"El proceso de Ollama terminó inesperadamente (código {_process.ExitCode}). " +
+                        $"Ollama process ended unexpectedly (code {_process.ExitCode}). " +
                         (string.IsNullOrWhiteSpace(extra)
-                            ? "Puede que ya hubiera una instancia usando el puerto 11434."
+                            ? "Another instance might be using port 11434."
                             : extra));
                 }
 
@@ -150,7 +149,7 @@ namespace ScreenTranslator.Services
             }
 
             throw new TimeoutException(
-                $"Ollama no respondió dentro de {timeoutSeconds} segundos.");
+                $"Ollama did not respond within {timeoutSeconds} seconds.");
         }
 
         public async Task<List<string>> GetAvailableModelsAsync()
@@ -183,7 +182,7 @@ namespace ScreenTranslator.Services
                 }
                 catch
                 {
-                    // No vale la pena crashear el cierre de la app por esto
+                    // Not worth for the app to crash if we can't kill the process. It might have already exited or been killed by the user.
                 }
             }
 

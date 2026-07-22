@@ -16,7 +16,7 @@ namespace ScreenTranslator.Services
 
     public class ModelDownloadService
     {
-        private const string OllamaPullEndpoint = "http://localhost:11434/api/pull";
+        private const string OllamaPullEndpoint = "http://127.0.0.1:11434/api/pull";
 
         public async Task DownloadModelAsync(
             string modelName,
