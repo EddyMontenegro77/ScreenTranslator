@@ -25,7 +25,7 @@
                     HorizontalAlignment="Center"
                     Margin="0,35,0,20">
 
-            <TextBlock Text="ScreenTranslator"
+            <TextBlock Text="Niholator"
                        FontSize="32"
                        FontWeight="Bold"
                        HorizontalAlignment="Center"/>

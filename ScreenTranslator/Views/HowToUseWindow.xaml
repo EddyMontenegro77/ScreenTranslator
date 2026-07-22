@@ -41,6 +41,8 @@
                        TextWrapping="Wrap" Margin="0,0,0,4"/>
             <TextBlock Text="• Vertical text (such as Japanese vertical writing) will be displayed in a horizontal translation window for better readability."
                        TextWrapping="Wrap" Margin="0,0,0,15"/>
+            <TextBlock Text="• You will need to install Windows language packs for the languages you will use, so the character recognition works correctly."
+           TextWrapping="Wrap" Margin="0,0,0,15"/>
 
             <Button Content="Close"
                     Width="100"
